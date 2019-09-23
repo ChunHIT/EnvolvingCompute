@@ -1,8 +1,8 @@
-package GA;
+package GA.Selection;
 
 public class Selection {
 
-	public static double[] Cusume(double[] A) {
+    public static double[] Cusume(double[] A) {
         //适应于轮盘赌的累加器
         double[] cus = new double[A.length+1];
         
@@ -12,8 +12,8 @@ public class Selection {
         }
         return cus;
     }
-	
-	public static double Sum(double[] Arr) {
+    
+    public static double Sum(double[] Arr) {
         //求和
         double sum = 0.0;
         for (int i = 0;i <Arr.length;i++) {
@@ -22,9 +22,8 @@ public class Selection {
         return sum;
     }
 	
-	public static int[][] fitness_proportional(double[] Fit, int PopSize, int[] BS, int[][] Pop) {
+	public static int[][] fitness_proportional(double[] Fit, int PopSize, int[] BS, int[][] Pop, int N) {
 		//轮盘赌选择
-		int N = Data.XY().length;
         double[] cusFit0 = Cusume(Fit);//数组长度变为N+1，补充了首个元素0.0
         double sumFit = Sum(Fit);
             //归一化
@@ -33,6 +32,7 @@ public class Selection {
             cusFit[i] =cusFit0[i] / sumFit;
         }
         
+        //交叉操作
         int[][] newPop = new int[PopSize][N];
         for (int q = 0;q < N; q++) {
              newPop[0][q] = BS[q];
@@ -47,12 +47,11 @@ public class Selection {
                 }
             }
         }
-		return newPop;
+        return newPop;
 	}
 	
-	public static int[][] tournament(double[] Fit, int PopSize, int[][] Pop, int[] BS) {
+	public static int[][] tournament(double[] Fit, int PopSize, int[][] Pop, int[] BS, int N) {
 		//锦标赛选择
-		int N = Data.XY().length;
 		int n = PopSize / 10;
 		int[][] p = new int[PopSize][N];
 		for (int i = 0; i < PopSize; i++) {

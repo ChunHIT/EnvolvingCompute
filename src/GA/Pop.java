@@ -2,10 +2,9 @@ package GA;
 
 public class Pop {
     
-    public static double fit(int[] Ind) {
+    public static double fit(int[] Ind, Data data) {
         //计算适应度函数
-        double[][] xy = Data.XY();
-        double[][] DM = DistanceMatrix.DistMatrix(xy);
+        double[][] DM = data.distance;
         double dist = 0.0;
         int s = Ind.length;
         
